@@ -195,6 +195,13 @@ let
         }
         preFixupHooks+=(_pythonQtBindingPreFixupHook)
       '';
+
+      # Some packages ask for pyqt/sip specifically. Above we are only building with
+      # pyside/shiboken, we have to force pyside to be used
+      postPatch = ''
+        sed -e "s#for binding_name in binding_order#for binding_name in ['pyside']#" \
+            -i src/python_qt_binding/binding_helper.py
+      '';
     });
 
     rqt-console = rosSuper.rqt-console.overrideAttrs ({
