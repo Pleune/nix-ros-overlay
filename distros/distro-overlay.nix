@@ -190,12 +190,12 @@ let
         });
       });
     }).overrideAttrs ({
-      propagatedNativeBuildInputs ? [], ...
+      propagatedBuildInputs ? [], ...
     }: {
-      propagatedNativeBuildInputs = propagatedNativeBuildInputs ++ (with rosSelf.pythonPackages; [
+      propagatedBuildInputs = propagatedBuildInputs ++ (with rosSelf.pythonPackages; [
         shiboken2
         pyside2
-        sip_4
+        sip4
       ]);
 
       dontWrapQtApps = true;
